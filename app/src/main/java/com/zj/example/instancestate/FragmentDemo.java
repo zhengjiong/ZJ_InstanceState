@@ -14,12 +14,23 @@ import android.widget.TextView;
  * 參考: http://www.soloho.cc/blog/how-to-save-fragment_state
  * 保存Fragment的狀態
  * 利用Activity的onSaveInstanceState保存Fragment实例的数据，并在onCreate里面恢复数据。
+ *
+ *
+ * 當屏幕旋轉的時候調用的順序:
+ * 04-23 08:49:12.923    5577-5577/com.zj.example.instancestate I/MyFragment﹕ MyFragment onSaveInstanceState
+ * 04-23 08:49:12.923    5577-5577/com.zj.example.instancestate I/FragmentDemo﹕ FragmentDemo onSaveInstanceState
+ * 04-23 08:49:12.924    5577-5577/com.zj.example.instancestate I/MyFragment﹕ onDestroyView
+ * 04-23 08:49:13.013    5577-5577/com.zj.example.instancestate I/FragmentDemo﹕ FragmentDemo savedInstanceState != null
+ * 04-23 08:49:13.017    5577-5577/com.zj.example.instancestate I/MyFragment﹕ onCreateView
+ * 04-23 08:49:13.018    5577-5577/com.zj.example.instancestate I/MyFragment﹕ MyFragment savedInstanceState != null
+ *
+ *
  * create by zhengjiong
  * Date: 2015-04-21
  * Time: 08:39
  */
-public class FragmentTest extends ActionBarActivity {
-    private static final String TAG = "FragmentTest";
+public class FragmentDemo extends ActionBarActivity {
+    private static final String TAG = "FragmentDemo";
 
     private MyFragment mFragment;
 
@@ -30,12 +41,12 @@ public class FragmentTest extends ActionBarActivity {
 
 
         if (savedInstanceState == null) {
-            Log.i(TAG, "FragmentTest savedInstanceState == null");
+            Log.i(TAG, "FragmentDemo savedInstanceState == null");
             mFragment = new MyFragment();
 
         } else {
             //利用onSaveInstanceState保存Fragment实例的数据，并在onCreate里面恢复数据。
-            Log.i(TAG, "FragmentTest savedInstanceState != null");
+            Log.i(TAG, "FragmentDemo savedInstanceState != null");
             mFragment = (MyFragment) getSupportFragmentManager()
                     .getFragment(savedInstanceState, "fragment");
         }
@@ -49,7 +60,7 @@ public class FragmentTest extends ActionBarActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        Log.i(TAG, "FragmentTest onSaveInstanceState");
+        Log.i(TAG, "FragmentDemo onSaveInstanceState");
 
         //利用onSaveInstanceState保存Fragment实例的数据，并在onCreate里面恢复数据。
         /**
@@ -63,12 +74,21 @@ public class FragmentTest extends ActionBarActivity {
 
     static public class MyFragment extends Fragment{
         private static final String TAG = "MyFragment";
+        private View mRootView;
         private TextView mTxtContent;
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            View view = inflater.inflate(R.layout.fragment, null);
-            mTxtContent = (TextView) view.findViewById(R.id.txt);
+            Log.i(TAG, "onCreateView");
+            mRootView = inflater.inflate(R.layout.fragment, null);
+            return mRootView;
+        }
+
+        @Override
+        public void onActivityCreated(Bundle savedInstanceState) {
+            super.onActivityCreated(savedInstanceState);
+
+            mTxtContent = (TextView) mRootView.findViewById(R.id.txt);
 
             if (savedInstanceState == null) {
                 Log.i(TAG, "MyFragment savedInstanceState == null");
@@ -80,7 +100,6 @@ public class FragmentTest extends ActionBarActivity {
                 Log.i(TAG, "MyFragment savedInstanceState != null");
                 mTxtContent.setText("MyFragment savedInstanceState != null, outState = " + savedInstanceState.getString("content"));
             }
-            return view;
         }
 
         /**
@@ -92,6 +111,12 @@ public class FragmentTest extends ActionBarActivity {
             super.onSaveInstanceState(outState);
             Log.i(TAG, "MyFragment onSaveInstanceState");
             outState.putString("content", "zhengjiong");
+        }
+
+        @Override
+        public void onDestroyView() {
+            super.onDestroyView();
+            Log.i(TAG, "onDestroyView");
         }
     }
 }

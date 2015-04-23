@@ -39,7 +39,7 @@ import android.widget.Toast;
  * Date: 2015-04-20
  * Time: 08:13
  */
-public class ActivityTest extends ActionBarActivity {
+public class ActivityDemo extends ActionBarActivity {
     private static final String TAG = "MainActivity";
 
     private TextView mTxtContent;

@@ -24,10 +24,13 @@ public class MainActivity extends ActionBarActivity{
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn1:
-                startActivity(new Intent(MainActivity.this, ActivityTest.class));
+                startActivity(new Intent(MainActivity.this, ActivityDemo.class));
                 break;
             case R.id.btn2:
-                startActivity(new Intent(MainActivity.this, FragmentTest.class));
+                startActivity(new Intent(MainActivity.this, FragmentDemo.class));
+                break;
+            case R.id.btn3:
+                startActivity(new Intent(MainActivity.this, FragmentDemo2.class));
                 break;
         }
     }
