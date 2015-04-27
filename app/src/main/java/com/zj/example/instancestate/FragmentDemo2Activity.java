@@ -10,56 +10,60 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 /**
- *
- * 參考: http://www.soloho.cc/blog/how-to-save-fragment_state
- * 保存Fragment的狀態
- * 利用Activity的onSaveInstanceState保存Fragment实例的数据，并在onCreate里面恢复数据。
  * create by zhengjiong
- * Date: 2015-04-21
- * Time: 08:39
+ * Date: 2015-04-27
+ * Time: 08:00
  */
-public class FragmentDemo2 extends ActionBarActivity {
-    private static final String TAG = "FragmentTest";
-
-    private MyFragment mFragment;
+public class FragmentDemo2Activity extends ActionBarActivity {
+    private String TAG = "FragmentDemo2Activity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_test_layout);
+        Log.i(TAG, "onCreate");
+        MyFragment myFragment = (MyFragment) getSupportFragmentManager().findFragmentById(R.id.place_holder);
 
+        if (myFragment == null) {
+            Log.i(TAG, "myFragment = null");
+            myFragment = new MyFragment();
 
-        if (savedInstanceState == null) {
-            Log.i(TAG, "FragmentTest savedInstanceState == null");
-            mFragment = new MyFragment();
-
-        } else {
-            Log.i(TAG, "FragmentTest savedInstanceState != null");
-
+            /*getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.place_holder, myFragment)
+                    .commit();*/
         }
+        /**
+         * commit放在if裡面還外面的效果一樣,
+         * 屏幕旋轉后,執行效果如下:
+         *
+         * 04-27 08:38:44.110  26075-26075/com.zj.example.instancestate I/MyFragment﹕ MyFragment onSaveInstanceState
+         * 04-27 08:38:44.110  26075-26075/com.zj.example.instancestate I/FragmentDemo2Activity﹕ onSaveInstanceState
+         * 04-27 08:38:44.110  26075-26075/com.zj.example.instancestate I/MyFragment﹕ onDestroyView
+         * 04-27 08:38:44.162  26075-26075/com.zj.example.instancestate I/FragmentDemo2Activity﹕ onCreate
+         * 04-27 08:38:44.167  26075-26075/com.zj.example.instancestate I/MyFragment﹕ onCreateView
+         * 04-27 08:38:44.169  26075-26075/com.zj.example.instancestate I/MyFragment﹕ MyFragment savedInstanceState != null
 
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.place_holder, mFragment, "myFragment")
+         */
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.place_holder, myFragment)
                 .commit();
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        Log.i(TAG, "FragmentTest onSaveInstanceState");
-
+        Log.i(TAG, "onSaveInstanceState");
     }
 
-    static public class MyFragment extends Fragment{
+    static public class MyFragment extends Fragment {
         private static final String TAG = "MyFragment";
         private View mRootView;
         private TextView mTxtContent;
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            Log.i(TAG, "MyFragment onCreateView");
-            mRootView = inflater.inflate(R.layout.fragment, null);
+            Log.i(TAG, "onCreateView");
+            mRootView = inflater.inflate(R.layout.fragment, container, false);
             return mRootView;
         }
 

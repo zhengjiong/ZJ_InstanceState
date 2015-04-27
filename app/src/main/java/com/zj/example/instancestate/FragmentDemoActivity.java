@@ -17,19 +17,19 @@ import android.widget.TextView;
  *
  *
  * 當屏幕旋轉的時候調用的順序:
- * 04-23 08:49:12.923    5577-5577/com.zj.example.instancestate I/MyFragment﹕ MyFragment onSaveInstanceState
- * 04-23 08:49:12.923    5577-5577/com.zj.example.instancestate I/FragmentDemo﹕ FragmentDemo onSaveInstanceState
- * 04-23 08:49:12.924    5577-5577/com.zj.example.instancestate I/MyFragment﹕ onDestroyView
- * 04-23 08:49:13.013    5577-5577/com.zj.example.instancestate I/FragmentDemo﹕ FragmentDemo savedInstanceState != null
- * 04-23 08:49:13.017    5577-5577/com.zj.example.instancestate I/MyFragment﹕ onCreateView
- * 04-23 08:49:13.018    5577-5577/com.zj.example.instancestate I/MyFragment﹕ MyFragment savedInstanceState != null
+ * MyFragment﹕ MyFragment onSaveInstanceState
+ * FragmentDemo﹕ FragmentDemo onSaveInstanceState
+ * MyFragment﹕ onDestroyView
+ * FragmentDemo﹕ FragmentDemo savedInstanceState != null
+ * MyFragment﹕ onCreateView
+ * MyFragment﹕ MyFragment savedInstanceState != null
  *
  *
  * create by zhengjiong
  * Date: 2015-04-21
  * Time: 08:39
  */
-public class FragmentDemo extends ActionBarActivity {
+public class FragmentDemoActivity extends ActionBarActivity {
     private static final String TAG = "FragmentDemo";
 
     private MyFragment mFragment;
@@ -44,17 +44,25 @@ public class FragmentDemo extends ActionBarActivity {
             Log.i(TAG, "FragmentDemo savedInstanceState == null");
             mFragment = new MyFragment();
 
+            /**
+             * commit放在if裡面還外面的效果一樣,
+             */
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.place_holder, mFragment, "myFragment")
+                    .commit();
         } else {
             //利用onSaveInstanceState保存Fragment实例的数据，并在onCreate里面恢复数据。
             Log.i(TAG, "FragmentDemo savedInstanceState != null");
+
+            /**
+             * 必須使用getFragment獲取mFragment對象,
+             * 如果這裡想用成員變量mFragment是不行的,屏幕旋轉后或者被系統回收后mFragment已經是一個null對象,
+             * 下面的replace會NullPointerException,
+             */
             mFragment = (MyFragment) getSupportFragmentManager()
                     .getFragment(savedInstanceState, "fragment");
         }
-
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.place_holder, mFragment, "myFragment")
-                .commit();
     }
 
     @Override
@@ -62,12 +70,16 @@ public class FragmentDemo extends ActionBarActivity {
         super.onSaveInstanceState(outState);
         Log.i(TAG, "FragmentDemo onSaveInstanceState");
 
-        //利用onSaveInstanceState保存Fragment实例的数据，并在onCreate里面恢复数据。
         /**
-         * putFragment(Bundle bundle, String key, Fragment fragment):
+         * 如果想要在屏幕旋轉后或者Activity和Fragment被系統回收后恢復以前的狀態,必須在
+         * onSaveInstanceState保存Fragment实例的数据，并在onCreate里面恢复数据。
+         * 保存Fragment的方法為putFragment(),恢復Fragment的方法為getFragment()
+         *
+         * putFragment(Bundle bundle, String key, Fragment fragment)
+         * 方法解釋:
          * Put a reference to a fragment in a Bundle. This Bundle can be persisted as saved state,
          * and when later restoring getFragment(Bundle, String) will return the current instance of the same fragment.
-         * 把fragment實例放入Bundle中,在還原的時候,可以使用getFragment(Bundle, String)恢復出相同的Fragment
+         * 翻譯:把fragment實例放入Bundle中,在還原的時候,可以使用getFragment(Bundle, String)恢復出相同的Fragment
          */
         getSupportFragmentManager().putFragment(outState, "fragment", mFragment);
     }
@@ -80,7 +92,7 @@ public class FragmentDemo extends ActionBarActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             Log.i(TAG, "onCreateView");
-            mRootView = inflater.inflate(R.layout.fragment, null);
+            mRootView = inflater.inflate(R.layout.fragment, container, false);
             return mRootView;
         }
 

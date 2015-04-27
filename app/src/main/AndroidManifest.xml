@@ -17,8 +17,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".ActivityDemo"/>
-        <activity android:name=".FragmentDemo"/>
-        <activity android:name=".FragmentDemo2"/>
+        <activity android:name=".FragmentDemoActivity"/>
+        <activity android:name=".AddToBackStackSaveInstanceDemoActivity"/>
+        <activity android:name=".FragmentDemo2Activity"/>
     </application>
 
 </manifest>

@@ -27,10 +27,13 @@ public class MainActivity extends ActionBarActivity{
                 startActivity(new Intent(MainActivity.this, ActivityDemo.class));
                 break;
             case R.id.btn2:
-                startActivity(new Intent(MainActivity.this, FragmentDemo.class));
+                startActivity(new Intent(MainActivity.this, FragmentDemoActivity.class));
                 break;
             case R.id.btn3:
-                startActivity(new Intent(MainActivity.this, FragmentDemo2.class));
+                startActivity(new Intent(MainActivity.this, FragmentDemo2Activity.class));
+                break;
+            case R.id.btn4:
+                startActivity(new Intent(MainActivity.this, AddToBackStackSaveInstanceDemoActivity.class));
                 break;
         }
     }

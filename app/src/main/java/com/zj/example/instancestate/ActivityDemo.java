@@ -40,7 +40,7 @@ import android.widget.Toast;
  * Time: 08:13
  */
 public class ActivityDemo extends ActionBarActivity {
-    private static final String TAG = "MainActivity";
+    private static final String TAG = "ActivityDemo";
 
     private TextView mTxtContent;
 

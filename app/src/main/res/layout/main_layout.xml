@@ -25,4 +25,12 @@
         android:layout_marginTop="10dp"
         android:onClick="onClick"
         android:text="Fragment Demo2"/>
+    <Button
+        android:id="@+id/btn4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:onClick="onClick"
+        android:text="Add To Back Stack Save Instance Demo"/>
+
 </LinearLayout>
