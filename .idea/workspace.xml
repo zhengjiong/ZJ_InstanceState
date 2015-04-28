@@ -41,12 +41,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FragmentDemoActivity.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="FragmentDemoActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/zj/example/instancestate/FragmentDemoActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.24774775">
-              <caret line="47" column="35" selection-start-line="47" selection-start-column="35" selection-end-line="47" selection-end-column="35" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="88" column="31" selection-start-line="88" selection-start-column="31" selection-end-line="88" selection-end-column="31" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FragmentDemo2Activity.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/zj/example/instancestate/FragmentDemo2Activity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.3716216">
+              <caret line="42" column="58" selection-start-line="42" selection-start-column="58" selection-end-line="42" selection-end-column="58" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -868,8 +880,8 @@
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/main_layout.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/zj/example/instancestate/MainActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/zj/example/instancestate/FragmentDemo2Activity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/zj/example/instancestate/FragmentDemoActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/zj/example/instancestate/FragmentDemo2Activity.java" />
       </list>
     </option>
   </component>
@@ -1845,18 +1857,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/zj/example/instancestate/FragmentDemo2Activity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/zj/example/instancestate/FragmentDemoActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.28519857">
-          <caret line="36" column="24" selection-start-line="35" selection-start-column="11" selection-end-line="36" selection-end-column="24" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="88" column="31" selection-start-line="88" selection-start-column="31" selection-end-line="88" selection-end-column="31" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/zj/example/instancestate/FragmentDemoActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/zj/example/instancestate/FragmentDemo2Activity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.24774775">
-          <caret line="47" column="35" selection-start-line="47" selection-start-column="35" selection-end-line="47" selection-end-column="35" />
-          <folding />
+        <state vertical-scroll-proportion="0.3716216">
+          <caret line="42" column="58" selection-start-line="42" selection-start-column="58" selection-end-line="42" selection-end-column="58" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

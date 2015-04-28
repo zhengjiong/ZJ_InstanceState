@@ -28,25 +28,26 @@ public class FragmentDemo2Activity extends ActionBarActivity {
             Log.i(TAG, "myFragment = null");
             myFragment = new MyFragment();
 
-            /*getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.place_holder, myFragment)
-                    .commit();*/
-        }
-        /**
-         * commit放在if裡面還外面的效果一樣,
-         * 屏幕旋轉后,執行效果如下:
-         *
-         * 04-27 08:38:44.110  26075-26075/com.zj.example.instancestate I/MyFragment﹕ MyFragment onSaveInstanceState
-         * 04-27 08:38:44.110  26075-26075/com.zj.example.instancestate I/FragmentDemo2Activity﹕ onSaveInstanceState
-         * 04-27 08:38:44.110  26075-26075/com.zj.example.instancestate I/MyFragment﹕ onDestroyView
-         * 04-27 08:38:44.162  26075-26075/com.zj.example.instancestate I/FragmentDemo2Activity﹕ onCreate
-         * 04-27 08:38:44.167  26075-26075/com.zj.example.instancestate I/MyFragment﹕ onCreateView
-         * 04-27 08:38:44.169  26075-26075/com.zj.example.instancestate I/MyFragment﹕ MyFragment savedInstanceState != null
+            /**
+             * commit放在if裡面還外面的效果一樣,
+             * 屏幕旋轉后,執行效果如下:
+             *
+             * 04-27 08:38:44.110  26075-26075/com.zj.example.instancestate I/MyFragment﹕ MyFragment onSaveInstanceState
+             * 04-27 08:38:44.110  26075-26075/com.zj.example.instancestate I/FragmentDemo2Activity﹕ onSaveInstanceState
+             * 04-27 08:38:44.110  26075-26075/com.zj.example.instancestate I/MyFragment﹕ onDestroyView
+             * 04-27 08:38:44.162  26075-26075/com.zj.example.instancestate I/FragmentDemo2Activity﹕ onCreate
+             * 04-27 08:38:44.167  26075-26075/com.zj.example.instancestate I/MyFragment﹕ onCreateView
+             * 04-27 08:38:44.169  26075-26075/com.zj.example.instancestate I/MyFragment﹕ MyFragment savedInstanceState != null
 
-         */
-        getSupportFragmentManager().beginTransaction()
+             */
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.place_holder, myFragment)
+                    .commit();
+        }
+
+        /*getSupportFragmentManager().beginTransaction()
                 .replace(R.id.place_holder, myFragment)
-                .commit();
+                .commit();*/
     }
 
     @Override
